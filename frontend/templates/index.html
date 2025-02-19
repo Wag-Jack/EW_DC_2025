@@ -1,0 +1,74 @@
+<DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-16" />
+    <meta name="viewport" content="width=device-widht, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Design Challenge</title>
+    <script>
+      async function validatePassword(event) {
+        event.preventDefault();
+        const password = document.getElementByName("password").value;
+        const response = await fetch(
+          "http://127.0.0.1:5000/validate_password",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(( password )),
+          }
+        );
+
+        const data = await response.json();
+        const messageDiv = document.getElementById("message");
+        const successMessage = document.getElementById("success");
+        const failMessage = document.getElementById("correct");
+        const congratsMessage = document.getElementById("congrats-image");
+        const goodbyeMessage = document.getElementById("goodbye");
+
+        messageDiv.innerHTLM = data.message;
+
+        if (!data.success) {
+          successMessage.style.display = "block";
+          failMessage.style.display = "none";
+          congratsMessage.style.display = "block";
+          goodbyeMessage.style.display = "block";
+        } else {
+          successMessage.style.display = "none";
+          failMessage.style.display = "block";
+          congratsMessage.style.display = "none";
+          goodbyeMessage.style.display = "none";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Input Password</h1>
+    <form onsubmit="submitPassword(event)">
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        required
+      />
+      <input type="submit" value="Enter" />
+    </form>
+    <div id="message"></div>
+    <div id="success" style="display: block">
+      Congratulations! Happy Engineering Week!
+    </div>
+    <div id="incorrect" style="display: none">
+      Try again!
+    </div>
+    <div id="goodbye" style="display:none">
+      Thank you for coming to this Design Challenge! GDGC, AIC, GWC, WiCS, and DoD appreciate it!
+    </div>
+    <img
+      id="congrats-picture"
+      src="ew.jpg"
+      alt="Engineering Week 2025"
+      style="display: none"
+    />
+  </body>
+</html>

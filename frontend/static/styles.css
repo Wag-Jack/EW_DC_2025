@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #002E62;
+    color: #FCC43B;
+}
+
+#project_name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #002E62;
+    font-size: larger;
+    text-align: center;
+    margin: 0;
+}
